@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CatagaryController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,4 +19,8 @@ Route::get('/', function () {
 });
 Route::get('admin',[AdminController::class,'index']);
 Route::post('admin/auth',[AdminController::class,'auth'])->name("admin.auth");
-Route::get('admin/dashboard',[AdminController::class,'dashboard']);
+Route::group(['middileware'=>'admin_athu'],function(){
+    Route::get('admin/dashboard',[AdminController::class,'dashboard']);
+    Route::get('admin/catagary',[CatagaryController::class,'index']);
+    Route::get('admin/manag_catagary',[CatagaryController::class,'manag_catagary']);
+});
