@@ -24,6 +24,7 @@
                             <th>ID</th>
                             <th>Catagary Name</th>
                             <th>Catagary Slug</th>
+                            <th>Catagary Image</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -33,6 +34,7 @@
                         <td>{{ $item->id }}</td>
                         <td>{{ $item->catagary_name }}</td>
                         <td>{{ $item->catagary_slug }}</td>
+                        <td><a href="{{ asset('storage/media/catagary/'.$item->catagary_image) }}" target="__blank"><img width="200px" src="{{ asset('storage/media/catagary/'.$item->catagary_image) }}" alt=""></a></td>
                         <td>
                               <a href="{{ url('admin/catagary/manag_catagary/')}}/{{ $item->id}}"><i class="fas fa-edit  "></i></a>  
                               @if($item->status==1)

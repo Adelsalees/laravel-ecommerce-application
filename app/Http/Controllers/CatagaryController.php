@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\catagary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\DB;
 
 class CatagaryController extends Controller
 {
@@ -31,13 +32,17 @@ class CatagaryController extends Controller
 
             $res['catagary_name']=$arr[0]->catagary_name;
             $res['catagary_slug']=$arr[0]->catagary_slug;
+            $res['parent_id']=$arr[0]->parent_id;
+            $res['catagary_image']=$arr[0]->catagary_image;
             $res['id']=$arr[0]->id;
         }else{
             $res['catagary_name']="";
             $res['catagary_slug']="";
+            $res['parent_id']="";
+            $res['catagary_image']="";
             $res['id']=0;
         }
-        
+        $res['catagaries']=DB::table('catagaries')->where(['status'=>1])->get();
         return view('admin/manag_catagary',$res);
     }
     public function manag_catagary_process(Request $request)
@@ -45,6 +50,7 @@ class CatagaryController extends Controller
 
         $request->validate([
             'catagary_name'=>'required',
+            'catagary_image'=>"mimes:jpeg,jpg,png,gif",
             'catagary_slug'=>'required | unique:catagaries,catagary_slug,'.$request->post('id'),
 
         ]);
@@ -57,6 +63,15 @@ class CatagaryController extends Controller
         }
         $model->catagary_name=$request->post('catagary_name');
         $model->catagary_slug=$request->post('catagary_slug');
+        $model->parent_id=$request->post('parent_id');
+        if($request->hasFile('catagary_image')){
+            $image=$request->file('catagary_image');
+            $ext=$image->extension();
+            $image_name=time().".".$ext;
+            $image->storeAs('/public/media/catagary',$image_name);
+            $model->catagary_image=$image_name;
+        }
+       // $model->catagary_image=$request->post('catagary_image');
         $model->status=1;
         $model->save();
         $request->session()->flash('message',$msg);

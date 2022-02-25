@@ -17,6 +17,7 @@
         <link href="{{asset('admin_asset/vendor/font-awesome-4.7/css/font-awesome.min.css')}}" rel="stylesheet" media="all">
         <link href="{{asset('admin_asset/vendor/font-awesome-5/css/fontawesome-all.min.css')}}" rel="stylesheet" media="all">
         <link href="{{asset('admin_asset/vendor/mdi-font/css/material-design-iconic-font.min.css')}}" rel="stylesheet" media="all">
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
         <!-- Bootstrap CSS-->
@@ -70,6 +71,18 @@
                             <a href="{{ url('admin/color') }}">
                                 <i class="fa-solid fa-brush"></i>Color</a>
                         </li>
+                        <li class="@yield('brand_class')">
+                            <a href="{{ url('admin/brand') }}">
+                                <i class="fa-brands fa-elementor"></i>Brands</a>
+                        </li>
+                        <li class="@yield('tax_class')">
+                            <a href="{{ url('admin/tax') }}">
+                                <i class="fa-brands fa-elementor"></i>Tax</a>
+                        </li>
+                        <li class="@yield('product_class')">
+                            <a href="{{ url('admin/product') }}">
+                                <i class="fa-brands fa-product-hunt"></i>Products</a>
+                        </li>
                         
                     </ul>
                 </div>
@@ -107,6 +120,19 @@
                         <li class="@yield('color_class')">
                             <a href="{{ url('admin/color') }}">
                                 <i class="fa-solid fa-brush"></i>Color</a>
+                        </li>
+                        <li class="@yield('brand_class')">
+                            <a href="{{ url('admin/brand') }}">
+                                <i class="fa-brands fa-elementor"></i>Brands</a>
+                        </li>
+                        <li class="@yield('brand_class')">
+                            <a href="{{ url('admin/tax') }}">
+                                <i class="fa-brands fa-elementor"></i>Tax</a>
+                        </li>
+
+                        <li class="@yield('product_class')">
+                            <a href="{{ url('admin/product') }}">
+                                <i class="fa-brands fa-product-hunt"></i>Products</a>
                         </li>
                         
                     </ul>
@@ -176,6 +202,7 @@
 
  <!-- Jquery JS-->
  <script src="{{asset('admin_asset/vendor/jquery-3.2.1.min.js')}}"></script>
+ 
  <!-- Bootstrap JS-->
  <script src="{{asset('admin_asset/vendor/bootstrap-4.1/popper.min.js')}}"></script>
  <script src="{{asset('admin_asset/vendor/bootstrap-4.1/bootstrap.min.js')}}"></script>
