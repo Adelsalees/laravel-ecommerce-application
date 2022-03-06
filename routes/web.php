@@ -1,6 +1,6 @@
 <?php
+//ADMIN
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CatagaryController;
 use App\Http\Middleware\adminAuth;
@@ -10,6 +10,14 @@ use App\Http\Controllers\ColorController;
 use App\Http\Controllers\BrandController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TaxController;
+use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\HomeBannerController;
+
+//USER
+use App\Http\Controllers\Front\FrontController;
+
+use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,9 +28,10 @@ use App\Http\Controllers\TaxController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/', function () {
-    return view('welcome');
-});
+//USER
+Route::get('/',[FrontController::class,'index']);
+
+//ADMIN 
 Route::get('admin',[AdminController::class,'index']);
 Route::post('admin/auth',[AdminController::class,'auth'])->name("admin.auth");
 Route::group(['middleware'=>'admin_auth'],function(){
@@ -86,11 +95,27 @@ Route::group(['middleware'=>'admin_auth'],function(){
     Route::get('admin/product/product_attr_delete/{pid}/{id}',[ProductController::class,'product_attr_delete']);  
     Route::get('admin/product/product_image_delete/{pid}/{id}',[ProductController::class,'product_image_delete']);   
 
+//banner
+    Route::get('admin/homeBanner',[HomeBannerController::class,'index']);
+    Route::get('admin/homeBanner/manag_homeBanner',[HomeBannerController::class,'manag_homeBanner']);
+    Route::get('admin/homeBanner/manag_homeBanner/{id}',[HomeBannerController::class,'manag_homeBanner']);
+    Route::post('admin/homeBanner/manag_homeBanner_procces',[HomeBannerController::class,'manag_homeBanner_process'])->name('homeBanner.manag_homeBanner_procces');
+    Route::get('admin/homeBanner/delete/{id}',[HomeBannerController::class,'delete']);
+    Route::get('admin/homeBanner/status/{status}/{id}',[HomeBannerController::class,'status']);  
+
+//user
+    Route::get('admin/customer',[CustomerController::class,'index']);
+    Route::get('admin/customer/show/{id}',[CustomerController::class,'show']);
+    Route::get('admin/customer/status/{status}/{id}',[CustomerController::class,'status']); 
+
     Route::get('admin/logout',function(){
       session()->forget("ADMIN_LOG");
       session()->forget('ADMIN_ID');
       session()->flash("error","Logout successfully");
       return redirect('admin');
     });
-   
+
+//--------------------------------------------------------------------------
+
+
 });

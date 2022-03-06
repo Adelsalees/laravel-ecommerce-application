@@ -6,6 +6,7 @@ use App\Models\catagary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class CatagaryController extends Controller
 {
@@ -34,12 +35,14 @@ class CatagaryController extends Controller
             $res['catagary_slug']=$arr[0]->catagary_slug;
             $res['parent_id']=$arr[0]->parent_id;
             $res['catagary_image']=$arr[0]->catagary_image;
+            $res['is_home']=$arr[0]->is_home;
             $res['id']=$arr[0]->id;
         }else{
             $res['catagary_name']="";
             $res['catagary_slug']="";
             $res['parent_id']="";
             $res['catagary_image']="";
+            $res['is_home']="";
             $res['id']=0;
         }
         $res['catagaries']=DB::table('catagaries')->where(['status'=>1])->get();
@@ -64,7 +67,12 @@ class CatagaryController extends Controller
         $model->catagary_name=$request->post('catagary_name');
         $model->catagary_slug=$request->post('catagary_slug');
         $model->parent_id=$request->post('parent_id');
+      
         if($request->hasFile('catagary_image')){
+                $arrImage=DB::table('catagaries')->where(['id'=>$request->post('id')])->get();
+                if(  Storage::exists('/public/media/catagary/'.$arrImage[0]->catagary_image)){
+                    Storage::delete('/public/media/catagary/'.$arrImage[0]->catagary_image);
+                 }
             $image=$request->file('catagary_image');
             $ext=$image->extension();
             $image_name=time().".".$ext;
@@ -72,6 +80,10 @@ class CatagaryController extends Controller
             $model->catagary_image=$image_name;
         }
        // $model->catagary_image=$request->post('catagary_image');
+       $model->is_home=0;
+       if($request->post('is_home')!=null){
+        $model->is_home=1;
+       }
         $model->status=1;
         $model->save();
         $request->session()->flash('message',$msg);

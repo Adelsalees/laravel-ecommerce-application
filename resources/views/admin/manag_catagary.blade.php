@@ -32,7 +32,7 @@
                                         <div class="form-group  ">
                                             <label for="parent_id" class="control-label ">Parent Catagary</label>
                                             <select name="parent_id" id="parent_id" class="form-control" required>
-                                                <option value="">-- Select Catagaries --</option>
+                                                <option value="0">-- Select Catagaries --</option>
                                                 @foreach($catagaries as $item)
                                                 @if($item->id==$parent_id)
                                                     <option selected value="{{$item->id}}">{{ $item->catagary_name }}</option>
@@ -54,6 +54,7 @@
                                         </div>
                                         <div>
                                     </div>
+                                    
                             </div>
                             <div class="row ml-1">
                                 <div class="col-12">
@@ -71,6 +72,19 @@
                                  </div>
                                 </div>
                             </div>
+                          <div class="row w-100 ml-1">
+                           <div class="col-12">
+                            <div class="form-group">
+                                <label for="is_home" class="control-label ">Show in home page</label>
+                                @if($is_home==1)
+                                <input type="checkbox" name="is_home" checked  id="is_home">
+                                @else
+                                <input type="checkbox" name="is_home"  style="margin-top:5px" id="is_home">
+                                @endif
+                            </div>
+                           </div>
+                          </div>
+
                             
                            
                                 <button id="" type="submit" class="btn btn-lg btn-info btn-block">

@@ -77,13 +77,20 @@
                         </li>
                         <li class="@yield('tax_class')">
                             <a href="{{ url('admin/tax') }}">
-                                <i class="fa-brands fa-elementor"></i>Tax</a>
+                                <i class="fa-solid fa-percent"></i>Tax</a>
+                        </li>
+                        <li class="@yield('homeBanner_class')">
+                            <a href="{{ url('admin/homeBanner') }}">
+                                <i class="fa-solid fa-signs-post"></i>Home Banner</a>
                         </li>
                         <li class="@yield('product_class')">
                             <a href="{{ url('admin/product') }}">
                                 <i class="fa-brands fa-product-hunt"></i>Products</a>
                         </li>
-                        
+                        <li class="@yield('customer_class')">
+                            <a href="{{ url('admin/customer') }}">
+                                <i class="fa-solid fa-user"></i></i>Customers</a>
+                        </li>
                     </ul>
                 </div>
             </nav>
@@ -127,12 +134,19 @@
                         </li>
                         <li class="@yield('brand_class')">
                             <a href="{{ url('admin/tax') }}">
-                                <i class="fa-brands fa-elementor"></i>Tax</a>
+                                <i class="fa-solid fa-percent"></i>Tax</a>
                         </li>
-
+                        <li class="@yield('homeBanner_class')">
+                            <a href="{{ url('admin/homeBanner') }}">
+                                <i class="fa-solid fa-signs-post"></i>Home Banner</a>
+                        </li>
                         <li class="@yield('product_class')">
                             <a href="{{ url('admin/product') }}">
                                 <i class="fa-brands fa-product-hunt"></i>Products</a>
+                        </li>
+                        <li class="@yield('customer_class')">
+                            <a href="{{ url('admin/customer') }}">
+                                <i class="fa-solid fa-user"></i></i>Customers</a>
                         </li>
                         
                     </ul>

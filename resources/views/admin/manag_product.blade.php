@@ -66,6 +66,9 @@
                                         <div class="alert alert-danger" role="alert">{{ $message }}</div>     
                                         @enderror
                                     </div>
+                                    @if($image!="")
+                                    <a href="{{ asset('storage/media/'.$image) }}" target="__blank"><img width="200px" src="{{ asset('storage/media/'.$image) }}" alt=""></a>
+                                    @endif
                                     <div class="row">
                                         <div class="form-group col-sm-12 col-lg-4 ">
                                             <label for="catagary_id" class="control-label ">Catagary</label>
